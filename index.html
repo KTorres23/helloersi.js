@@ -45,7 +45,7 @@
     </arcgis-map>
 
     <script>
-        require(["esri/Graphic", "esri/layers/GraphicsLayer"], (Graphic, GraphicsLayer) => {
+        require(["esri/Graphic", "esri/layers/GraphicsLayer", "esri/widgets/Popup"], (Graphic, GraphicsLayer, Popup) => {
             const arcgisMap = document.querySelector("arcgis-map");
 
             arcgisMap.addEventListener("arcgisViewReadyChange", () => {
@@ -71,7 +71,15 @@
 
           const pointGraphic = new Graphic({
             geometry: point,
-            symbol: simpleMarkerSymbol
+            symbol: simpleMarkerSymbol,
+            attributes: {
+              Name: "my point",
+              Description: "trying something new!"
+            },
+            popupTemplate: {
+              title: "{Name}",
+              content: "{Description}"
+            }
           });
           graphicsLayer.add(pointGraphic);
           });
